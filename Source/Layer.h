@@ -1,15 +1,26 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include "./Neuron.h"
+#include "Network.h"
+#include "Neuron.h"
+
+class Network;
+class Neuron;
 
 class Layer {
 	public:
-		int size;
-		Neuron* neurons;
-		
-		Layer(int);
+		Neuron* 	neurons		= nullptr;
+		int 		size		= 0;
+		int 		index		= 0;
+		Network* 	network		= nullptr;
+		Layer*		previous	= nullptr;
+
+		// Constructor & Destructor //
+		Layer(Network*, int, int);
 		~Layer();
+
+		// Evaluation function //
+		void evaluate();
 };
 
 #endif

@@ -11,9 +11,18 @@ parser = ap.ArgumentParser("preprocess.py", description="Preprocesses a Project 
 parser.add_argument("file", help="The path to the file to be preprocessed.")
 args = parser.parse_args()
 
-strip_boilerplate = re.compile(r"^.+\*{3} START OF THE PROJECT GUTENBERG EBOOK .+ \*{3}", re.DOTALL)
-remove_titles = re.compile(r"^[A-Z \.]{2,}$\n", re.MULTILINE)
-extra_line_breaks = re.compile(r"^\n", re.MULTILINE)
+remove_line_breaks = re.compile(r"\s+")
+find_sentences = re.compile(r"", re.DOTALL)
 
 txt = ""
-with open(args.file, encoding="utf-8") as file: txt = file.read()
+with open(args.file, encoding="utf-8") as file: 
+	txt = file.read()
+
+print("ORIGINAL: ")
+print(txt[0:2000])
+
+txt = remove_line_breaks.sub(" ", txt)
+# txt = " ".join( find_sentences.findall(txt) )
+
+print("PREPROCESSED: ")
+print(txt[0:2000])
